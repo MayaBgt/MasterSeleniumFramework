@@ -20,6 +20,7 @@ import java.io.IOException;
 public class AddToCartTest extends BaseTest {
 
 
+    @Link("https://askomdch.com/")
     @Link(name = "allure", type = "Link")
     @TmsLink("165537")
     @Issue("165537")
