@@ -9,6 +9,7 @@ import org.selenium.pom.dataproviders.MyDataProvider;
 import org.selenium.pom.objects.Product;
 import org.selenium.pom.pages.CartPage;
 import org.selenium.pom.pages.HomePage;
+import org.selenium.pom.pages.ProductPage;
 import org.selenium.pom.pages.StorePage;
 import org.selenium.pom.utils.JacksonUtils;
 import org.testng.Assert;
@@ -20,11 +21,6 @@ import java.io.IOException;
 public class AddToCartTest extends BaseTest {
 
 
-    @Link("https://askomdch.com/")
-    @Link(name = "allure", type = "Link")
-    @TmsLink("165537")
-    @Issue("165537")
-    @Description("Description")
     @Test(description = "Adding a product to card from the Store page")
     public void addToCartFromStorePage() throws IOException {
         Product product = new Product(1215);
@@ -32,17 +28,27 @@ public class AddToCartTest extends BaseTest {
                 getProductThumbnail().clickAddToCartBtn(product.getName()).
                 clickViewCart();
         Assert.assertEquals(cartPage.getProductName(), product.getName());
-
     }
 
-    @Link("https://askomdch.com/")
+
     @Test(dataProvider = "getFeaturedProducts", dataProviderClass = MyDataProvider.class)
-    public void addToCardFeaturedProducts(Product product) {
+    public void addToCartFeaturedProducts(Product product) {
         CartPage cartPage = new HomePage(getDriver()).load().
                 getProductThumbnail().clickAddToCartBtn(product.getName()).
                 clickViewCart();
         Assert.assertEquals(cartPage.getProductName(), product.getName());
+        System.out.println("Product added: " + product.getName());
     }
 
+    @Test
+    public void addToCartFromProductPage() throws IOException {
+        Product product = new Product(1215);
+        ProductPage productPage = new ProductPage(getDriver()).
+                loadProductPage(product.getName()).
+                clickAddToCartBtn();
 
+        Assert.assertEquals(productPage.getViewCartBtn(), "VIEW CART");
+    }
 }
+
+

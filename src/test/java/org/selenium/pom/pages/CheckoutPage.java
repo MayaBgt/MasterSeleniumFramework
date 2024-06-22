@@ -31,7 +31,7 @@ public class CheckoutPage extends BasePage {
     By alternateCountryDropdown = By.id("select2-billing_country-container");
     By alternateStateDropdown = By.id("select2-billing_state-container");
     private final By directBankTransferRadioBtn = By.id("payment_method_bacs");
-
+    private final By cashOnDeliveryRadioBtn = By.id("payment_method_cod");
     private final By productName = By.cssSelector("td[class='product-name']");
 
     public CheckoutPage(WebDriver driver) {
@@ -171,9 +171,28 @@ public class CheckoutPage extends BasePage {
         return this;
     }
 
-    public String getProductName() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(productName)).getText();
+    public CheckoutPage selectCashOnDelivery() {
+        WebElement e = waitForElementToBeClickable(cashOnDeliveryRadioBtn);
+        if (!e.isSelected()) {
+            e.click();
+        }
+        return this;
     }
+
+    public String getProductName() throws Exception {
+        int i = 5;
+        while(i > 0){
+            try {
+                return wait.until(ExpectedConditions.visibilityOfElementLocated(productName)).getText();
+            }catch (StaleElementReferenceException e){
+                System.out.println("NOT FOUND. TRYING AGAIN" + e);
+            }
+            Thread.sleep(5000);
+            i--;
+        }
+        throw new Exception("Element not found");
+    }
+
 
 }
 

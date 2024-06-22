@@ -14,11 +14,12 @@ public class CartApi {
 
     private Cookies cookies;
 
-    public CartApi() {}
-
+    public CartApi() {
+    }
     public CartApi(Cookies cookies) {
         this.cookies = cookies;
     }
+
 
     public Cookies getCookies() {
         return cookies;
@@ -32,7 +33,7 @@ public class CartApi {
         formParams.put("product_id", productId);
         formParams.put("quantity", quantity);
 
-        if(cookies == null) {
+        if (cookies == null) {
             cookies = new Cookies();
         }
         Response response = given().
@@ -41,9 +42,9 @@ public class CartApi {
                 formParams(formParams).
                 cookies(cookies).
                 log().all().
-        when().
+                when().
                 post("/?wc-ajax=add_to_cart").
-        then().
+                then().
                 log().all().
                 extract().
                 response();

@@ -4,8 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.selenium.pom.base.BasePage;
+import org.selenium.pom.objects.Product;
 import org.selenium.pom.pages.CartPage;
-import org.selenium.pom.pages.HomePage;
+import org.selenium.pom.pages.ProductPage;
+
+import java.util.List;
 
 public class ProductThumbnail extends BasePage {
     private final By viewCartLink = By.cssSelector("a[title='View cart']");
@@ -14,9 +17,9 @@ public class ProductThumbnail extends BasePage {
         super(driver);
     }
 
+
     private By getAddToCartBtnElement(String productName) {
         return By.cssSelector("a[aria-label='Add “" + productName + "” to your cart']");
-        //Add “Blue Shoes” to your cart
     }
 
     public ProductThumbnail clickAddToCartBtn(String productName) {
@@ -31,4 +34,17 @@ public class ProductThumbnail extends BasePage {
         e.click();
         return new CartPage(driver);
     }
+
+    private By getProductNameElement(String productName) {
+        String productNameFormatted = productName.replace(" ", "-").toLowerCase();
+        return By.xpath("//a[@href= 'https://askomdch.com/product/" + productNameFormatted + "/']");
+    }
+    public ProductPage clickProductNameElement(String productName) {
+        WebElement e = waitForElementToBeVisible(getProductNameElement(productName));
+        e.click();
+        return new ProductPage(driver);
+    }
+
+
+
 }

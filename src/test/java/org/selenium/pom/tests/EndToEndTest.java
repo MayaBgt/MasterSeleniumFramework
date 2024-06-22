@@ -11,14 +11,13 @@ import org.selenium.pom.pages.StorePage;
 import org.selenium.pom.utils.ConfigLoader;
 import org.selenium.pom.utils.JacksonUtils;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 
 import java.io.IOException;
 
 
-public class FirstTestCase extends BaseTest {
+public class EndToEndTest extends BaseTest {
 
-//    @Test
+    //    @Test
     public void guestCheckoutUsingDirectBankTransfer() throws IOException {
 
         String searchFor = "Blue";
@@ -29,7 +28,7 @@ public class FirstTestCase extends BaseTest {
                 load().
                 getMyHeader().navigateToStoreUsingMenu();
         storePage.isLoaded();
-        storePage.search(searchFor);
+        storePage.searchPartialMatch(searchFor);
         Assert.assertEquals(storePage.getTile(), "Search results: “" + searchFor + "”");
 
         storePage.getProductThumbnail().clickAddToCartBtn(product.getName());
@@ -44,12 +43,10 @@ public class FirstTestCase extends BaseTest {
                 selectDirectBankTransfer().
                 placeOrder();
 
-
         Assert.assertEquals(checkoutPage.getNotification(), "Thank you. Your order has been received.");
-
     }
 
-//    @Test
+    //    @Test
     public void loginAndCheckoutUsingDirectBankTransfer() throws IOException {
 
         String searchFor = "Blue";
@@ -61,7 +58,7 @@ public class FirstTestCase extends BaseTest {
         StorePage storePage = new HomePage(getDriver()).
                 load().getMyHeader().navigateToStoreUsingMenu();
         storePage.isLoaded();
-        storePage.search(searchFor);
+        storePage.searchPartialMatch(searchFor);
         Assert.assertEquals(storePage.getTile(), "Search results: “" + searchFor + "”");
 
         storePage.getProductThumbnail().clickAddToCartBtn(product.getName());

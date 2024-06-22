@@ -6,17 +6,19 @@ public abstract class DriverManagerAbstract {
     protected WebDriver driver;
 
     protected abstract void startDriver();
+
+    public WebDriver getDriver() {
+        if (driver == null) {
+            startDriver();
+        }
+        return driver;
+    }
     public void quitDriver() {
-        if(driver != null) {
+        if (driver != null) {
             driver.quit();
             driver = null;
         }
     }
 
-    public WebDriver getDriver() {
-        if(driver == null) {
-            startDriver();
-        }
-        return driver;
-    }
+
 }

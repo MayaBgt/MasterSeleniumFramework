@@ -25,7 +25,7 @@ public class ConfigLoader {
     }
 
     public static ConfigLoader getInstance() {
-        if(configLoader == null) {
+        if (configLoader == null) {
             configLoader = new ConfigLoader();
         }
         return configLoader;
@@ -33,19 +33,19 @@ public class ConfigLoader {
 
     public String getBaseUrl() {
         String prop = properties.getProperty("baseUrl");
-        if(prop != null) return prop;
+        if (prop != null) return prop;
         else throw new RuntimeException("Property baseUrl is not specified in the stg_config.properties file.");
     }
 
     public String getUsername() {
         String prop = properties.getProperty("username");
-        if(prop != null) return prop;
+        if (prop != null) return prop;
         else throw new RuntimeException("Property username is not specified in the stg_config.properties file.");
     }
 
     public String getPassword() {
         String prop = properties.getProperty("password");
-        if(prop != null) return prop;
+        if (prop != null) return prop;
         else throw new RuntimeException("Property password is not specified in the stg_config.properties file.");
     }
 }

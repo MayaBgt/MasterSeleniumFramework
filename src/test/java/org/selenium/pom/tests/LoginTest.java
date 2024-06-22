@@ -1,10 +1,12 @@
 package org.selenium.pom.tests;
 
+import com.beust.ah.A;
 import org.selenium.pom.api.actions.CartApi;
 import org.selenium.pom.api.actions.SignUpApi;
 import org.selenium.pom.base.BaseTest;
 import org.selenium.pom.objects.Product;
 import org.selenium.pom.objects.User;
+import org.selenium.pom.pages.AccountPage;
 import org.selenium.pom.pages.CheckoutPage;
 import org.selenium.pom.utils.FakerUtils;
 import org.testng.Assert;
@@ -15,7 +17,7 @@ import java.io.IOException;
 public class LoginTest extends BaseTest {
 
     @Test
-    public void loginDuringCheckout() throws IOException {
+    public void loginDuringCheckout() throws Exception {
         String username = "demouser" + new FakerUtils().generateRandomNumber();
         User user = new User().
                 setUsername(username).
@@ -35,6 +37,24 @@ public class LoginTest extends BaseTest {
                 clickToLogin().
                 login(user);
         Assert.assertTrue(checkoutPage.getProductName().contains(product.getName()));
+    }
 
+    @Test
+    public void loginFailsNoCredentialsEntered() {
+        String errorMessage = "Error: Username is required.";
+        AccountPage accountPage = new AccountPage(getDriver()).
+                load().
+                clickLoginBtn();
+        Assert.assertEquals(accountPage.getErrorMessageText(), errorMessage);
+    }
+
+    @Test
+    public void loginFailsNoPasswordEntered() {
+        String errorMessage = "Error: The password field is empty.";
+        AccountPage accountPage = new AccountPage(getDriver()).
+                load().
+                enterUsername().
+                clickLoginBtn();
+        Assert.assertEquals(accountPage.getErrorMessageText(), errorMessage);
     }
 }

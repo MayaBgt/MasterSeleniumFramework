@@ -8,11 +8,13 @@ public class Product {
     private int id;
     private String name;
 
-    public Product() {}
+
+    public Product() {
+    }
     public Product(int id) throws IOException {
         Product[] products = JacksonUtils.deserializeJson("products.json", Product[].class);
-        for(Product product : products) {
-            if(product.getId() == id) {
+        for (Product product : products) {
+            if (product.getId() == id) {
                 this.id = id;
                 this.name = product.getName();
             }
@@ -34,6 +36,4 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
-
-
 }

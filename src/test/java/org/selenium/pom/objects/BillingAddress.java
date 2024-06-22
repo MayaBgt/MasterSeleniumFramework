@@ -8,6 +8,20 @@ public class BillingAddress {
     private String postalCode;
     private String email;
     private String country;
+    private String state;
+
+    public BillingAddress() {
+    }
+
+    public BillingAddress(String firstName, String lastName, String addressLineOne,
+                          String city, String postalCode, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.addressLineOne = addressLineOne;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.email = email;
+    }
 
     public String getCountry() {
         return country;
@@ -23,20 +37,6 @@ public class BillingAddress {
 
     public void setState(String state) {
         this.state = state;
-    }
-
-    private String state;
-
-    public BillingAddress() {}
-
-    public BillingAddress(String firstName, String lastName, String addressLineOne,
-                          String city, String postalCode, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.addressLineOne = addressLineOne;
-        this.city = city;
-        this.postalCode = postalCode;
-        this.email = email;
     }
 
     public String getFirstName() {
@@ -92,7 +92,4 @@ public class BillingAddress {
         this.email = email;
         return this;
     }
-
-
-
 }

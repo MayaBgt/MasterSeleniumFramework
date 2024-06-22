@@ -26,6 +26,7 @@ public class BaseTest {
     private final ThreadLocal<DriverManagerAbstract> driverManager = new ThreadLocal<>();
     private final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
+
     private void setDriverManager(DriverManagerAbstract driverManager) {
         this.driverManager.set(driverManager);
     }
@@ -80,9 +81,10 @@ public class BaseTest {
     }
 
     private void takeScreenshot(File destFile) throws IOException {
-        TakesScreenshot takesScreenshot =  (TakesScreenshot) getDriver();
+        TakesScreenshot takesScreenshot = (TakesScreenshot) getDriver();
         File srcFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(srcFile, destFile);
 
     }
+
 }

@@ -14,7 +14,5 @@ public class DriverManagerFactoryAbstract {
             }
             default -> throw new IllegalStateException("Unexpected value: " + driverType);
         }
-
     }
-
 }

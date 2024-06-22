@@ -41,13 +41,13 @@ public class SignUpApi {
                 baseUri(ConfigLoader.getInstance().getBaseUrl()).
                 cookies(cookies).
                 log().all().
-        when().
+                when().
                 get("/account").
-        then().
+                then().
                 log().all().
                 extract().
                 response();
-        if(response.getStatusCode() !=200) {
+        if (response.getStatusCode() != 200) {
             throw new RuntimeException("Failed to fetch the account, HTTP Status Code: " + response.getStatusCode());
         }
         return response;
@@ -69,13 +69,13 @@ public class SignUpApi {
                 formParams(formParams).
                 cookies(cookies).
                 log().all().
-        when().
+                when().
                 post("/account").
-        then().
+                then().
                 log().all().
                 extract().
                 response();
-        if(response.getStatusCode() !=302) {
+        if (response.getStatusCode() != 302) {
             throw new RuntimeException("Failed to register the account, HTTP Status Code: " + response.getStatusCode());
         }
         this.cookies = response.getDetailedCookies();

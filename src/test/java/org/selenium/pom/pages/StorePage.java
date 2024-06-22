@@ -12,18 +12,17 @@ public class StorePage extends BasePage {
     private final By searchFld = By.id("woocommerce-product-search-field-0");
     private final By searchBtn = By.cssSelector("button[value='Search']");
     private final By title = By.cssSelector("#main > div > header > h1");
-
-    public ProductThumbnail getProductThumbnail() {
-        return productThumbnail;
-    }
-
     private ProductThumbnail productThumbnail;
+    private final By productTitle = By.xpath(("//h2[@class='woocommerce-loop-product__title']"));
+    private final By noProductsFoundMessage = By.cssSelector(".woocommerce-info.woocommerce-no-products-found");
+
 
 
     public StorePage(WebDriver driver) {
         super(driver);
         productThumbnail = new ProductThumbnail(driver);
     }
+
 
     public StorePage load() {
         load("/store");
@@ -46,11 +45,16 @@ public class StorePage extends BasePage {
         return this;
     }
 
-    public StorePage search(String txt) {
+    public StorePage searchPartialMatch(String txt) {
         //   driver.findElement(searchFld).sendKeys(txt);
         //    driver.findElement(searchBtn).click();
         enterTextInSearchFld(txt).clickSearchBtn();
         return this;
+    }
+
+    public ProductPage searchExactMatch(String txt) {
+        enterTextInSearchFld(txt).clickSearchBtn();
+        return new ProductPage(driver);
     }
 
     public String getTile() {
@@ -58,5 +62,17 @@ public class StorePage extends BasePage {
         return e.getText();
     }
 
+    public ProductThumbnail getProductThumbnail() {
+        return productThumbnail;
+    }
 
+    public ProductPage clickProductTitle() {
+        WebElement e = waitForElementToBeVisible(productTitle);
+        e.click();
+        return new ProductPage(driver);
+    }
+    public String getNonExistingProductText() {
+        WebElement e = waitForElementToBeVisible(noProductsFoundMessage);
+        return e.getText();
+    }
 }

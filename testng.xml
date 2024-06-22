@@ -5,17 +5,17 @@
 
         <parameter name="browser" value="FIREFOX"/>
         <classes>
-            <class name="org.selenium.pom.tests.FirstTestCase" />
+            <class name="org.selenium.pom.tests.EndToEndTest" />
         </classes>
     </test>-->
 
     <test name="Chrome" thread-count="6" parallel="methods"  >
-        <packages>
+<!--        <packages>
             <package name="org.selenium.pom.tests" />
-        </packages>
+        </packages>-->
         <parameter name="browser" value="CHROME"/>
-  <!--      <classes>
-            <class name="org.selenium.pom.tests.FirstTestCase" />
-        </classes>-->
+        <classes>
+            <class name="org.selenium.pom.tests.CouponTest" />
+        </classes>
     </test>
 </suite>
